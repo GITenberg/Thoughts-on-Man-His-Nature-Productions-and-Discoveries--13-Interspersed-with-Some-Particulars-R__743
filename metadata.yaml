@@ -1,0 +1,28 @@
+_repo: Thoughts-on-Man-His-Nature-Productions-and-Discoveries--13-Interspersed-with-Some-Particulars-R__743
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Godwin, William
+    alias: Baldwin, Edward
+    birthdate: 1756
+    deathdate: 1836
+    gutenberg_agent_id: '380'
+    url: http://www.gutenberg.org/2009/agents/380
+    wikipedia: http://en.wikipedia.org/wiki/William_Godwin
+description: ''
+gutenberg_issued: '1996-12-01'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '743'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcsh 'Human beings'
+- !lcc 'BF'
+- !lcsh 'Psychology -- Early works to 1850'
+- GITenberg
+title: "Thoughts on Man, His Nature, Productions and Discoveries\r\nInterspersed with\
+  \ Some Particulars Respecting the Author"
+url: http://www.gutenberg.org/ebooks/743
