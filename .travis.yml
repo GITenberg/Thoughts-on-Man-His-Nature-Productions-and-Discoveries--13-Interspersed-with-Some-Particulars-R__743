@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: fXFgZzC0mmuQ/zOyEkUviWOnk8mojakTOuPrTuaTyRd8qJ4uG97z0ZrHzOZMsD68ZKHdLfgCg+vkFJhNos6N8qi2cyfkArPZImKfKHx/vjkf7CUQmd46/aZSRwypc/w0FLTNbpfmZLQ/0ika8G8tpQmvoaQFqt8tkGtakURBTVADFE5RAPMWK1iIr/n0yAnBL+ZzdxSLOuafLQPpG668vuu5Gv/gO+tgs93Ur6dzdX94jhkwcSbHFEwRdas7/zb4HeXJ3MLHdsXDUHW686gLFfklvkKPHbax2PbcU4sqeyJd/ipz6nO2m6efcMYfaMXR8Bi4RUTmhZ12UIeb8G54nQV2Sj9hBUnY1iXQgCIgQe1jKt9qTGfPhlT5VecWCk5aXyraHwQCW6bl/TIWCLMJzI5wDVxsj97JYsR0dwNmIzZzF8Xugw0oVCrfzdvssuy3ne1SmyMGoo2RZJC87+9Sw4DS9BzUj77RhGJMRISxLYHM9fHcULpl9os1WBuphqRIbppeW8txen7ZTNuNlcgbvyk4PIwU+SULvfvv4KjQEhorpNGUapwplBWOrdyxeFMgDidK6ZF3AaQsL5/MBGrfsMZo3YQS/L3y4PVzx0BWzrpbqP242aUTAKdzdf9FeCXqjvcl1v9n5lMnBNGz5NZbg/Dzf+cGz14rLurljeOSwus=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Thoughts-on-Man-His-Nature-Productions-and-Discoveries--13-Interspersed-with-Some-Particulars-R__743
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
